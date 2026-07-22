@@ -1,0 +1,13 @@
+/* px -> pixel -> 16px  */
+/* @import url('https://fonts.googleapis.com/css2?family=Nova+Square&display=swap'); */
+
+p{
+    text-align: justify;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: bolder;
+}
+
+body{
+    font-family: "Nova Square", sans-serif;
+}
