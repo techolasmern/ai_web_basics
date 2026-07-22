@@ -1,0 +1,24 @@
+ /* Element / Tag selector */
+ /* selector{
+            property: value;
+        } */
+
+ h1 {
+     color: red;
+     background-color: black;
+ }
+
+ /* class selector . -> use dot */
+ .demo {
+     background-color: red;
+     color: white;
+ }
+
+ /* .demo{
+            background-color: blue;
+        } */
+ /* id selector # -> use hash symbol */
+ #sampleId {
+     background-color: green;
+     color: yellow;
+ }
