@@ -1,6 +1,31 @@
 .box{
-    padding: 20px;
-    margin: 20px;
-    border: 2px solid gray; 
+    /* padding: 20px;
+    margin: 30px;
+    border: 2px solid gray;  */
     /* width type color */
+    /* height: 100px;
+    width: 100px;
+    box-sizing: border-box; */
+
+    /* padding: 0 30px; */
+    /* padding-top: 20px;
+    padding-bottom: 20px; */
+    /* padding-block: 20px; */
+    /* padding-left: 30px;
+    padding-right: 30px; */
+    /* padding-inline: 30px; */
+/* 
+    border: 2px solid red; */
+
+    border-width: 4px;
+    border-style: double;
+    border-top-color: green;
+    /* border-left: none;
+    border-right: none; */
+    /* border-inline: none; */
+    /* border-block: none; */
+    border-left-color: red;
+    border-bottom-color: blue;
+    
 }
+
