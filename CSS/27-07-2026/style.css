@@ -134,3 +134,50 @@ a:visited{
 }
 
 /* relative, absolute, fixed, sticky */
+
+.box__1, .box__2, .box__3{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+
+.box__1{
+    background-color: red;
+    z-index: 1
+}
+
+.box__2{
+    left: 60px;
+    top: 60px;
+    background-color: green;
+    z-index: 3;
+}
+
+.box__3{
+    left: 30px;
+    top: 30px;
+    background-color: blue;
+    z-index: 2;
+}
+
+.box_container_1 {
+    position: relative;
+    margin-top: 200px;
+    height: 800px;
+    width: 100px;
+}
+
+/* img{
+    aspect-ratio: 9/16;
+} */
+
+.top{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+
+
+
+
