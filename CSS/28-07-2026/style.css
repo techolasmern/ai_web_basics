@@ -1,0 +1,21 @@
+:root{
+    --primary: yellow;
+    --font-mono: monospace;
+}
+
+body{
+    background-color: black;
+}
+
+h1{
+    color: var(--primary);
+    font-family: var(--font-mono);
+}
+
+span{
+    background-color: var(--primary);
+}
+
+p{
+    color: var(--primary);
+}
