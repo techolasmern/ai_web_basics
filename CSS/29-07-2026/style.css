@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+}
+
+/* :root{
+    --primary: yellow;
+    --font-mono: monospace;
+}
+
+body{
+    background-color: black;
+}
+
+h1{
+    color: var(--primary);
+    font-family: var(--font-mono);
+}
+
+span{
+    background-color: var(--primary);
+}
+
+p{
+    color: var(--primary);
+} */
+
+.flex_container{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    flex-wrap: wrap;
+    /* gap: 10px; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* flex row -> x -> main axis */
+/* flex column -> y -> main axis */
+
+.flex_item{
+    width: 60px;
+    height: 60px;
+    background-color: red;
+}
