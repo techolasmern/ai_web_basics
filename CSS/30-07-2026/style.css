@@ -4,8 +4,10 @@
 
 .grid{
     display: grid;
-    grid-template-columns: repeat(20, 5vw);
-    grid-template-rows: repeat(10, 10vh);
+    height: 100vh;
+    gap: 2px;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(10, 1fr);
 }
 
 .grid-item{
