@@ -3,8 +3,9 @@
 }
 
 .grid{
+    margin: 2px;
     display: grid;
-    height: 100vh;
+    height: calc(100vh - 4px);
     gap: 2px;
     grid-template-columns: repeat(20, 1fr);
     grid-template-rows: repeat(10, 1fr);
