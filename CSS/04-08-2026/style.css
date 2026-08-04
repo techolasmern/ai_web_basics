@@ -7,19 +7,16 @@
     height: 100px;
     background-color: black;
 
-    /* animation: ; */
-
     /* animation-name: move;
     animation-duration: 2s;
     animation-timing-function: linear;
     animation-iteration-count: infinite; */
     animation: move 2s linear infinite;
-
     position: relative;
     /* animation-delay: 2s; */
 }
 
-@keyframes move{
+/* @keyframes move{
     from{
         background-color: black;
         left: 0;
@@ -32,4 +29,123 @@
         rotate: 360deg;
         border-radius: 100px;
     }
+} */
+
+@keyframes move{
+    0%, 100%{
+        top: 0;
+        left: 0;
+    }
+    25%{
+        top: 0;
+        left: 500px;
+    }
+    50%{
+        left: 500px;
+        top: 500px;
+    }
+    75%{
+        top: 500px;
+        left: 0;
+    }
+}
+
+.box_1, .box_2, .box_3, .box_4{
+    width: 20px;
+    height: 20px;
+    background-color: gray;
+    border-radius: 100%;
+    animation: bounce 2s linear infinite;
+
+    position: relative;
+    top: 10px;
+}
+
+.box_1{
+    animation-delay: 100ms;
+}
+.box_2{
+    animation-delay: 300ms;
+}
+.box_3{
+    animation-delay: 500ms;
+}
+.box_4{
+    animation-delay: 700ms;
+}
+
+@keyframes bounce{
+    0%{
+        top: 10px;
+    }
+    25%{
+        top: 0;
+    }
+    50%{
+        top: 10px;
+    }
+    75%{
+        top: 20px;
+    }
+    100%{
+        top: 10px;
+    }
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.loading_1, .loading_2, .loading_3{
+    width: 60px;
+    height: 60px;
+    border: 2px solid gray;
+    border-inline-color: transparent;
+    border-radius: 100%;
+    animation: rotate 1s linear infinite;
+}
+
+.loading_1, .loading_2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading_2{
+    height: 40px;
+    width: 40px;
+}
+
+.loading_3{
+    height: 20px;
+    width: 20px;
+}
+
+@keyframes rotate{
+    from{
+        rotate: 0deg;
+    }
+    to{
+        rotate: 360deg;
+    }
+}
+
+.btn{
+    padding: 15px 30px;
+    background-color: red;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover{
+    background-color: gray;
+    scale: 2;
+    /* box-shadow: none;
+    scale: 0.6; */
 }
