@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+
+    /* animation: ; */
+
+    /* animation-name: move;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; */
+    animation: move 2s linear infinite;
+
+    position: relative;
+    /* animation-delay: 2s; */
+}
+
+@keyframes move{
+    from{
+        background-color: black;
+        left: 0;
+        rotate: 0deg;
+        border-radius: 0;
+    }
+    to{
+        background-color: red;
+        left: 600px;
+        rotate: 360deg;
+        border-radius: 100px;
+    }
+}
