@@ -2,7 +2,7 @@
 
 // for, while, do while, for in, for of
 // 1 - 10 print
-for (let i = 1; i <= 10; i++){
+for (let i = 1; i <= 10; i++) {
     console.log(i); // 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 }
 console.log("Loop end");
@@ -26,11 +26,10 @@ do {
 
 console.log("do while end");
 
-// patterns
 
-for (let i = 1; i <= 5; i++){
+for (let i = 1; i <= 5; i++) {
     console.log("Inner Loop ok");
-    for (let j = 1; j <= 5; j++){
+    for (let j = 1; j <= 5; j++) {
         console.log(j); // 1, 2, 3, 4, 5
     }
     console.log("Outer loop end")
@@ -42,7 +41,7 @@ console.log("Final log")
 const num = 11;
 
 let is_prime = true;
-for (let p = 2; p <= num / 2 ; p++){
+for (let p = 2; p <= num / 2; p++) {
     if (num % p == 0) {
         is_prime = false;
         break;
