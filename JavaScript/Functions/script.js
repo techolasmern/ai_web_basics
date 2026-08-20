@@ -92,7 +92,7 @@ console.log(vol);
 // const arrowFunc = (a, b) => a + b;
 
 // const res2 = arrowFunc(10, 20);
-// console.log(res2)
+// console.log(res2);
 
 // single para
 const arrowFunc = n => n * n;
