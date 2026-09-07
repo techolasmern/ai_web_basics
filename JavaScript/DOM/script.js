@@ -46,3 +46,29 @@ console.log(elem_1); // operations same as getElementById()
 const elem_2 = document.querySelectorAll(".demo");
 
 console.log(elem_2); // operations same as getElementByClassName();
+
+// -----------------
+
+// class list
+
+// const body = document.body;
+
+const addDark = () => {
+    document.body.classList.add("dark");
+}
+
+const removeDark = () => {
+    document.body.classList.remove("dark");
+}
+
+const toggleDark = () => {
+    // document.body.classList.toggle("dark");
+    elements[0].classList.toggle("dark");
+}
+
+// ---------------------------------------------------------------
+
+// create elements
+
+// createElement
+
