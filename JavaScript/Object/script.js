@@ -182,3 +182,26 @@ console.log(map); // [ [key, value], [key, value], [key, value] ]
 for (const val of map.keys()) {
     console.log(val);
 }
+
+const obj_1 = {
+    name: "Amal",
+    age: 20,
+    location: {
+        city: "Kozhikode",
+        state: "Kerala",
+    },
+    address: {
+        home: "sample",
+        street: "sample",
+        city: "sample"
+    },
+    marks: [10, 20, 30, 40, 50],
+    is_saved: true
+}
+
+obj_1.address.city = "Kozhikode";
+
+console.log(obj_1.address.city);
+
+obj_1.marks.push(60);
+console.log(obj_1.marks)
