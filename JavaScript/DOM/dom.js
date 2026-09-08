@@ -26,3 +26,6 @@ for (let y = 1901; y <= dateTime.getFullYear(); y++){
 }
 
 document.body.appendChild(selectTag);
+
+
+// document.body.innerText = "<i>hello</i>";
