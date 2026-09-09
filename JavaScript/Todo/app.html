@@ -5,23 +5,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="./app.css">
 </head>
 
 <body>
     <div class="flex justify-center flex-col gap-4 items-center mt-4">
-        <form id="todo_form" class="w-full max-w-[500px] flex flex-col gap-3">
+        <form id="todo_form" class="w-full max-w-[500px] flex flex-col gap-2">
             <div class="flex flex-col">
-                <label for="todo_input">Enter Task:</label>
-                <input type="text" class="p-2 border-2 border-gray-200" placeholder="Eg: Write notes..." id="todo_input"
+                <div class="flex justify-between">
+                    <label for="todo_input">Enter Task:</label>
+                    <span id="counter">0</span>
+                </div>
+                <input type="text" class="p-2 border-2 rounded outline-none border-gray-200" placeholder="Eg: Write notes..." id="todo_input"
                     name="todo_input">
-                <span id="error"></span>
+                <span id="error" class="text-red-600 text-sm mt-1"></span>
             </div>
-            <button type="submit" class="p-2 w-full bg-green-700 text-white">Add Todo</button>
+            <button type="submit" class="p-2 rounded cursor-pointer w-full bg-gray-700 text-white">Add Todo</button>
         </form>
-        <div>
-            <ul id="list"></ul>
+        <div class="w-full max-w-[500px]">
+            <ul id="list" class="flex flex-col gap-2"></ul>
         </div>
     </div>
     <script src="./app.js"></script>

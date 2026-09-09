@@ -1,7 +1,44 @@
-.btn{
-    background-color: red;
+body{
+    padding: 10px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.btn-container{
+    display: flex;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.del-btn{
+    background-color: rgb(253, 96, 96);
     padding-inline: 16px;
     padding-block: 8px;
     border-radius: 4px;
-    margin-left: 10px;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
 }
+
+.ed-btn{
+    background-color: rgb(84, 84, 246);
+    padding-inline: 16px;
+    padding-block: 8px;
+    border-radius: 4px;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.todo_item{
+    width: 100%;
+    word-break: break-all;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
