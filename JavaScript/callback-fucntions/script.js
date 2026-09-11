@@ -80,3 +80,71 @@ console.log("-------------------------------------------------------------");
 loop(arr, (element, index, array) => {
     console.log(element, index, array);
 });
+
+console.log("----------------------------------------------------------")
+
+// callback with error and data;
+
+// const getUser = () => {
+
+// }
+
+// setTimeout, setInterval
+
+setTimeout(() => {
+    console.log("Hello after 2 second");
+}, 2000); // in ms
+
+const time = document.getElementById("time")
+
+
+setInterval(() => {
+    time.innerHTML = new Date().toLocaleString();
+}, 1000); // time in ms
+
+const getUser = (callback) => {
+    setTimeout(() => {
+        const user = { name: "Fasil", age: 20, city: "Kozhikode" };
+        callback(user);
+    }, 5000);
+}
+
+const handleCallback = (user) => {
+    console.log(user);
+}
+
+getUser(handleCallback)
+
+// -------------------------
+
+const div = (fn, sn, callback) => {
+    if (fn == 0 && sn == 0) {
+        callback("Math Error", null);
+    }
+    const res = fn / sn;
+    callback(null, res);
+}
+
+div(0, 10, (err, result) => {
+    if (err) {
+        console.log(err + ": is error")
+    } else {
+        console.log(result);
+    }
+});
+
+const displayRes = (res) => {
+    console.log(res);
+}
+
+const getArea = (l, b, callback) => {
+    const a = l * b;
+    callback(a, 20, displayRes);
+}
+
+const getVol = (area, h, callback) => {
+    const v = area * h
+    callback(v);
+}
+
+getArea(10, 20, getVol);   
