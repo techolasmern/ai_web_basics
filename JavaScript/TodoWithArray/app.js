@@ -1,3 +1,7 @@
+const form = document.getElementById("todo_form");
+const error = document.getElementById("error");
+const todoList = document.getElementById("list");
+const counter = document.getElementById("counter");
 let todoArray = [];
 
 const uuid = () => {
@@ -24,7 +28,7 @@ const createTodo = (todo) => {
         updatedAt: dateTime,
         status: "Pending"
     }
-    todoArray.unshift(todoObj);
+    todoArray.push(todoObj);
     return todoObj;
 }
 
@@ -40,21 +44,40 @@ const toggleStatus = (id) => {
         }
         return todo;
     })
+    reloadData();
 }
 
 const reloadData = () => {
-    
+    todoList.innerHTML = "";
+    todoArray.forEach((todo) => {
+        updateList(todo);
+    });
+    if (todoList.innerHTML == "") {
+        todoList.innerHTML = "There are no items to show.";
+        todoList.style.textAlign = "center";
+        todoList.style.marginTop = "20px";
+    }
 }
 
-const form = document.getElementById("todo_form");
-const error = document.getElementById("error");
-const todoList = document.getElementById("list");
-const counter = document.getElementById("counter");
 
 form.addEventListener("input", (event) => {
     counter.innerText = document.getElementById("todo_input").value.length;
     error.innerText = "";
 })
+
+const handleUpdateTask = todo => {
+    const edit_input = document.getElementById("edit_input");
+    todo.title = edit_input.value;
+    todo.updatedAt = new Date().toLocaleString();
+    const updated = todoArray.map(todoItem => {
+        if(todoItem.id == todo.id){
+            return todo;
+        }
+        return todoItem;
+    })
+    todoArray = updated;
+    reloadData();
+}
 
 const updateList = (todo) => {
     const li = document.createElement("li");
@@ -73,7 +96,11 @@ const updateList = (todo) => {
     editButton.innerHTML = "Edit";
     editButton.classList.add("ed-btn");
     editButton.addEventListener("click", () => {
-        alert("Edit not available");
+        li.innerHTML = "<div><b>Task:</b> <input type='text' id='edit_input' value=" + todo.title + " /></div><div><b>Status:</b> " + todo.status + "</div><div><b>Time:</b> " + todo.createdAt + "</div><br><button  class='update-btn' id='update_btn'>Update</button>";
+        const updateButton = document.getElementById("update_btn");
+        updateButton.addEventListener("click", () => {
+            handleUpdateTask(todo);
+        })
     })
 
     const statusButton = document.createElement("button");
@@ -91,6 +118,8 @@ const updateList = (todo) => {
 
     li.appendChild(btnContainer);
     todoList.appendChild(li);
+
+  
 }
 
 form.addEventListener("submit", (event) => {
@@ -113,4 +142,4 @@ form.addEventListener("submit", (event) => {
 
     counter.innerText = 0;
     todoElement.value = "";
-})
+});

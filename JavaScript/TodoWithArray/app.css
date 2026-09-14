@@ -31,7 +31,7 @@ body{
     border-radius: 4px;
 }
 
-.ed-btn{
+.ed-btn, .update-btn{
     background-color: rgb(84, 84, 246);
     padding-inline: 16px;
     padding-block: 8px;
