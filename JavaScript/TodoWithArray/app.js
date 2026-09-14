@@ -1,4 +1,4 @@
-const todoArray = [];
+let todoArray = [];
 
 const uuid = () => {
     const str = "abcdef0123456789";
@@ -28,6 +28,24 @@ const createTodo = (todo) => {
     return todoObj;
 }
 
+const handleRemoveTask = (id) => {
+    todoArray = todoArray.filter((todo) => todo.id != id);
+    console.log(todoArray)
+}
+
+const toggleStatus = (id) => {
+    const updated = todoArray.map((todo) => {
+        if (todo.id == id) {
+            todo.status = todo.status == "Pending" ? "Completed" : "Pending";
+        }
+        return todo;
+    })
+}
+
+const reloadData = () => {
+    
+}
+
 const form = document.getElementById("todo_form");
 const error = document.getElementById("error");
 const todoList = document.getElementById("list");
@@ -48,6 +66,7 @@ const updateList = (todo) => {
     deleteButton.classList.add("del-btn");
     deleteButton.addEventListener("click", () => {
         li.remove();
+        handleRemoveTask(todo.id);
     })
 
     const editButton = document.createElement("button");
@@ -58,10 +77,10 @@ const updateList = (todo) => {
     })
 
     const statusButton = document.createElement("button");
-    statusButton.innerHTML = "Mark Completed";
+    statusButton.innerHTML = "Completed";
     statusButton.classList.add("st-btn");
     statusButton.addEventListener("click", () => {
-        alert("Edit not available");
+        toggleStatus(todo.id);
     })
 
     const btnContainer = document.createElement("div");
@@ -89,7 +108,8 @@ form.addEventListener("submit", (event) => {
         return;
     }
 
-    updateList(createTodo(todo));
+    const newTask = createTodo(todo);
+    updateList(newTask);
 
     counter.innerText = 0;
     todoElement.value = "";

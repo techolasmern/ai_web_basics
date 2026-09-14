@@ -85,3 +85,9 @@ const resReduce = array.reduce((total, element, index, arr) => {
 });
 
 console.log(resReduce);
+
+
+// value;
+
+// { id: ******, title: value, status: "Pending", createdAt: new Date() }
+// filter for delete; filter
