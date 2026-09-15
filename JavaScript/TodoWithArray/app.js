@@ -15,10 +15,6 @@ const uuid = () => {
     return arr.join("");
 }
 
-const getTodos = () => {
-    return todoArray;
-}
-
 const createTodo = (todo) => {
     const dateTime = new Date().toLocaleString();
     const todoObj = {
@@ -52,11 +48,6 @@ const reloadData = () => {
     todoArray.forEach((todo) => {
         updateList(todo);
     });
-    if (todoList.innerHTML == "") {
-        todoList.innerHTML = "There are no items to show.";
-        todoList.style.textAlign = "center";
-        todoList.style.marginTop = "20px";
-    }
 }
 
 
