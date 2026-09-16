@@ -36,15 +36,60 @@ console.log(toStr);
 
 // API FETCHING ->
 
-const response = fetch("https://randomuser.me/api/");
+// const response = fetch("https://randomuser.me/api/");
 
-response.then((apiResponse) => {
-    return apiResponse.json();
-}).then((successRes) => {
-    const firstName = successRes.results[0].name.first;
-    const p = document.createElement("p");
-    p.innerText = firstName;
-    document.body.appendChild(p);
-}).catch((err) => {
-    alert(err.message);
-})
+// response.then((apiResponse) => {
+//     return apiResponse.json();
+// }).then((successRes) => {
+//     const firstName = successRes.results[0].name.first;
+//     const p = document.createElement("p");
+//     p.innerText = firstName;
+//     document.body.appendChild(p);
+//     const res = fetch("https://randomuser.me/api/");
+//     res.then(response => {
+//         return response.json()
+//     }).then(res => {
+//         // statement
+//         const res = fetch("https://randomuser.me/api/");
+//         res.then(response => {
+//             return response.json()
+//         }).then(res => {
+//             // statement
+//             const res = fetch("https://randomuser.me/api/");
+//             res.then(response => {
+//                 return response.json()
+//             }).then(res => {
+//                 // statement
+//             }).catch(err => {
+//                 console.log(err)
+//             })
+//         }).catch(err => {
+//             console.log(err)
+//         })
+//     }).catch(err => {
+//         console.log(err)
+//     })
+// }).catch((err) => {
+//     alert(err.message);
+// })
+
+// ASYNC AWAIT
+
+// status code -> 200, 201, 400, 401, 404, 425, 409, 500, 502, 503
+
+async function call_api() {
+    try {
+        const apiResponse = await fetch("https://randomuser.me/api/");
+        if (!apiResponse.ok) {
+            throw new Error("Something went wrong");
+        }
+        const response = await apiResponse.json();
+        console.log(response);
+    } catch (err) {
+        console.log(err.message);
+    } finally {
+        console.log("Completed")
+    }
+}
+
+call_api();
