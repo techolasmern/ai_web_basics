@@ -79,7 +79,7 @@ console.log(toStr);
 
 async function call_api() {
     try {
-        const apiResponse = await fetch("https://randomuser.me/api/");
+        const apiResponse = await fetch("https://randomuser.me/api");
         if (!apiResponse.ok) {
             throw new Error("Something went wrong");
         }
