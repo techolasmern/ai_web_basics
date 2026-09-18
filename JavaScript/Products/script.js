@@ -1,39 +1,41 @@
 const cart_items = [];
 
+// ----------------- base url ----------------
 const base_url = "https://dummyjson.com";
 
-const get_api = (end_point) => {
-    return base_url + end_point;
+// ----------------- get api (end point -> path after the base url) ----------------
+const get_api = (end_point) => { // end_point -> example: /products?skip=85 (getting from line number 21)
+    return base_url + end_point; // returns example: https://dummyjson.com/products?skip=85
 }
 
-const request = async (url) => {
+const request = async (url) => { // url -> example: https://dummyjson.com/products?skip=85 (getting from line number 22)
     try {
         const response = await fetch(url);
-        return await response.json();
+        return await response.json(); // return response
     } catch (err) {
         return null;
     }
 }
 
 const getAllProducts = async () => {
-    const api = get_api("/products?skip=85");
+    const api = get_api("/products?skip=85"); // example: https://dummyjson.com/products?skip=85
     const response = await request(api);
-    return response.products;
+    return response.products; // return only products array
 }
 
 const root = document.getElementById("root");
-root.style.display = "block";
+root.style.display = "block"; // grid by default (to avoid conflict with loading spinner);
 const cartBadgeCount = document.getElementById("cart-badge");
 const loading = document.getElementById("loading");
 
 getAllProducts().then(products => {
-    loading.style.display = "none";
-    root.style.display = "grid";
+    loading.style.display = "none"; // hide loading spinner after getting products
+    root.style.display = "grid"; // reset to grid after loading products completed.
     products.forEach(product => {
 
-        const disPrice = product.price * (1 - product.discountPercentage / 100);
-        const images = product.images;
-        const main_image = images[0];
+        const disPrice = product.price * (1 - product.discountPercentage / 100); // discounted price
+        const images = product.images; // product image
+        const main_image = images[0]; // main image
 
         // -------------- product container / card start --------------
         const productContainer = document.createElement("div");
@@ -50,10 +52,10 @@ getAllProducts().then(products => {
 
         // ----------------- image events (hover and leave) -----------------
         img.addEventListener("mouseover", () => {
-            img.src = images[1] ? images[1] : main_image;
+            img.src = images[1] ? images[1] : main_image; // if images[1] exist, use it, else use main image
         })
         img.addEventListener("mouseleave", () => {
-            img.src = main_image;
+            img.src = main_image; // while mouse leave reset to main image
         })
 
         // ----------------- append image to image wrapper ----------------
@@ -95,6 +97,7 @@ getAllProducts().then(products => {
         // ----------------- add click event (add to cart) to cart button ----------------
         cartButton.addEventListener("click", () => {
             const itemIndex = cart_items.findIndex(item => item.id === product.id);
+            // if item is not in cart, add it with qty 1, else increment qty
             if (itemIndex == -1) {
                 cart_items.push({ ...product, qty: 1 });
                 qtyWrapper.style.display = "flex";
