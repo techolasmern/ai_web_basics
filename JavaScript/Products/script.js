@@ -35,16 +35,20 @@ getAllProducts().then(products => {
         const images = product.images;
         const main_image = images[0];
 
+        // -------------- product container / card start --------------
         const productContainer = document.createElement("div");
         productContainer.className = "product-item";
 
+        // -------------- image container / wrapper --------------------
         const imgWrapper = document.createElement("div");
         imgWrapper.className = "img-wrapper";
 
+        // ---------------- image ----------------
         const img = document.createElement("img");
         img.src = main_image;
         img.alt = product.title;
 
+        // ----------------- image events (hover and leave) -----------------
         img.addEventListener("mouseover", () => {
             img.src = images[1] ? images[1] : main_image;
         })
@@ -52,22 +56,48 @@ getAllProducts().then(products => {
             img.src = main_image;
         })
 
+        // ----------------- append image to image wrapper ----------------
         imgWrapper.appendChild(img);
+        // ----------------- append image wrapper to product container ----------------
+        productContainer.appendChild(imgWrapper);
 
+        // ----------------- add title ----------------
         const title = document.createElement("h2");
         title.innerHTML = product.title.length > 20 ? product.title.slice(0, 20) + "..." : product.title;
 
+        // ----------------- append title to product container ----------------
+        productContainer.appendChild(title);
+
+        // ----------------- add price container / wrapper ----------------
+        const priceWrapper = document.createElement("div");
+        priceWrapper.classList.add("price-block");
+
+        // ----------------- add price block ----------------
+        const leftPrice = document.createElement("div");
+        leftPrice.innerHTML = "<b>$" + disPrice.toFixed(2) + "</b> <s>$" + product.price + "</s>";
+
+        // ----------------- add rating block ----------------
+        const rightRating = document.createElement("div");
+        rightRating.innerHTML = "<span>" + product.rating + "</span>";
+
+        // ------------------- append both blocks to price wrapper ----------------
+        priceWrapper.appendChild(leftPrice);
+        priceWrapper.appendChild(rightRating);
+
+        // ------------------- append price wrapper to product container ----------------
+        productContainer.appendChild(priceWrapper);
+
+        // ----------------- add cart button ----------------
         const cartButton = document.createElement("button");
         cartButton.innerHTML = "Add to Cart";
         cartButton.classList.add("cart-button");
 
-        const qtyContainer = document.createElement("div");
-
+        // ----------------- add click event (add to cart) to cart button ----------------
         cartButton.addEventListener("click", () => {
             const itemIndex = cart_items.findIndex(item => item.id === product.id);
             if (itemIndex == -1) {
                 cart_items.push({ ...product, qty: 1 });
-                qtyContainer.style.display = "flex";
+                qtyWrapper.style.display = "flex";
                 cartButton.style.display = "none";
                 cartBadgeCount.innerText = cart_items.length;
                 cartBadgeCount.classList.add("bump");
@@ -75,47 +105,67 @@ getAllProducts().then(products => {
                     cartBadgeCount.classList.remove("bump");
                 }, 300);
             } else {
-                cart_items[itemIndex].qty += 56;
-                // a = a + b; a += b;
-                // a = a - b; a -= b;
-                // a = a * b; a *= b;
-                // a = a / b; a /= b;
+                cart_items[itemIndex].qty += 1;
             }
         })
 
-        qtyContainer.style.display = "none";
+        // ----------------- append cart button to product container ----------------
+        productContainer.appendChild(cartButton);
+
+        // ----------------- add qty container / wrapper ----------------
+        const qtyWrapper = document.createElement("div");
+        qtyWrapper.classList.add("qty-container"); // hidden by default (check style.css);
+
+        // ----------------- add qty display section ----------------
+        const qty_span = document.createElement("span");
+        qty_span.innerHTML = 1;
+        qty_span.classList.add("qty");
+
+        // ----------------- add qty decrement button ----------------
         const qtyDecrement = document.createElement("button");
         qtyDecrement.innerHTML = "-";
         qtyDecrement.classList.add("qty-button");
-        const qty = document.createElement("span");
-        qty.innerHTML = 0;
-        qty.classList.add("qty");
+
+        // ----------------- add click event (decrement qty) to qty decrement button ----------------
+        qtyDecrement.addEventListener("click", () => {
+            const itemIndex = cart_items.findIndex(item => item.id === product.id);
+            if (itemIndex == -1) return;
+            // if qty is 1, remove item from cart & show cart button
+            if (cart_items[itemIndex].qty <= 1) {
+                qtyWrapper.style.display = "none";
+                cartButton.style.display = "block";
+                cart_items.splice(itemIndex, 1);
+                cartBadgeCount.innerText = cart_items.length;
+                return;
+            }
+            cart_items[itemIndex].qty -= 1;
+            qty_span.innerHTML = cart_items[itemIndex].qty;
+        })
+
+        // ----------------- add qty increment button ----------------
         const qtyIncrement = document.createElement("button");
         qtyIncrement.innerHTML = "+";
         qtyIncrement.classList.add("qty-button");
 
-        const priceBlock = document.createElement("div");
-        priceBlock.classList.add("price-block");
+        // ----------------- add click event (increment qty) to qty increment button ----------------
+        qtyIncrement.addEventListener("click", () => {
+            const itemIndex = cart_items.findIndex(item => item.id === product.id);
+            if (itemIndex == -1) return;
+            cart_items[itemIndex].qty += 1;
+            qty_span.innerHTML = cart_items[itemIndex].qty;
+        })
 
-        const leftPrice = document.createElement("div");
-        leftPrice.innerHTML = "<b>$" + disPrice.toFixed(2) + "</b> <s>$" + product.price + "</s>";
+        // ----------------- append qty buttons and qty to qty wrapper in an order ----------------
+        qtyWrapper.appendChild(qtyDecrement); // left 
+        qtyWrapper.appendChild(qty_span); // center
+        qtyWrapper.appendChild(qtyIncrement); // right
 
-        const rightRating = document.createElement("div");
-        rightRating.innerHTML = "<span>" + product.rating + "</span>";
+        // --------------------- append qty wrapper to product container ----------------
+        productContainer.appendChild(qtyWrapper);
 
-        priceBlock.appendChild(leftPrice);
-        priceBlock.appendChild(rightRating);
-
-        qtyContainer.appendChild(qtyDecrement);
-        qtyContainer.appendChild(qty);
-        qtyContainer.appendChild(qtyIncrement);
-
-        productContainer.appendChild(imgWrapper);
-        productContainer.appendChild(title);
-        productContainer.appendChild(priceBlock);
-        productContainer.appendChild(cartButton);
-        productContainer.appendChild(qtyContainer);
-
+        // -------------------- final append product container to root ----------------
         root.appendChild(productContainer);
+
+        // pack up 😶‍🌫️
     })
 })

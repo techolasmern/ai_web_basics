@@ -219,7 +219,11 @@ img:hover {
     transform: scale(0.98);
 }
 
-
+.qty-container{
+    display: none;
+    justify-content: center;
+    padding-top: 1.7rem;
+}
 
 .qty-button {
     width: 32px;
