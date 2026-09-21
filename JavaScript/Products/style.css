@@ -20,12 +20,11 @@ body {
     font-family: "Montserrat", sans-serif;
     background-color: var(--bg-color);
     color: var(--text-main);
-    padding: 1rem 0;
+    padding: 1rem;
     min-height: 100vh;
 }
 
 .page-header {
-    max-width: 1200px;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -99,7 +98,6 @@ body {
 }
 
 .container {
-    max-width: 1200px;
     margin: 15px auto;
     display: grid;
     grid-template-columns: 1fr;
@@ -275,6 +273,13 @@ img:hover {
     border-radius: 50%;
 
     animation: spin 1s linear infinite;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
 }
 
 @media screen and (min-width: 576px) {
