@@ -1,18 +1,44 @@
-const getData = () => {
-    const data = localStorage.getItem("users");
-    const users = data ? JSON.parse(data) : [];
-    return users;
+const loginForm = document.getElementById('loginForm');
+const signupForm = document.getElementById('signupForm');
+const error = document.querySelectorAll('.error');
+
+signupForm.oninput = () => {
+    for (let i = 0; i < error.length; i++) {
+        error[i].innerHTML = '';
+    }
 }
 
-const setData = (users) => {
-    if (typeof users !== "object") return;
-    return localStorage.setItem("users", JSON.stringify(users));
+loginForm.oninput = () => {
+    for (let i = 0; i < error.length; i++) {
+        error[i].innerHTML = '';
+    }
 }
 
-const updateUsersArray = (user) => {
-    const users = getData();
-    const uIndex = users.findIndex(user => user.email === user.email);
-    if(uIndex !== -1) return;
-    users.push(user);
-    return setData(users);
-}
+loginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+});
+
+signupForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const number = document.getElementById('number').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if(!name || !email || !number || !password || !confirmPassword) {
+        alert('All fields are required');
+        return;
+    }
+
+    const user = {
+        name: name,
+        email: email,
+        number: number,
+        password: password
+    }
+
+    localStorage.setItem("user", JSON.stringify(user));
+});

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Single Page</h1>
+
+    <script>
+        const search = new URLSearchParams(location.search);
+        const id = search.get("sample_key")
+
+        fetch("https://dummyjson.com/products/"+id).then(Response =>{
+            return Response.json();
+        }).then(res =>{
+            console.log(res);
+        })
+    </script>
+</body>
+</html>

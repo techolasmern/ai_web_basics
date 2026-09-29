@@ -4,21 +4,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign Up</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body>
-    <form id="signup" name="signup">
-        <input type="text" name="name" placeholder="Eg: John">
-        <input type="text" name="number" placeholder="+91 8765754362">
-        <input type="text" name="email" placeholder="sample@gmail.com">
-        <input type="password" name="password" placeholder="***************">
-        <input type="password" name="confirm_password" placeholder="***************">
-        <button type="submit">Submit</button>
-    </form>
-    <script src="./auth.js"></script>
-    <script src="./signup.js"></script>
+<body class="bg-slate-950 text-slate-100 flex justify-center items-center min-h-screen my-8 font-sans">
+    <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl w-96 shadow-2xl">
+        <h2 class="text-3xl font-extrabold mb-2 text-center tracking-tight">Create Account</h2>
+        <p class="text-slate-400 text-sm text-center mb-6">Fill in your information to get started.</p>
+
+        <form id="signupForm" class="space-y-3.5">
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Full
+                    Name</label>
+                <input type="text" id="name" required
+                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 text-white rounded-lg box-border focus:outline-none focus:border-indigo-500 transition-colors">
+                <span class="error"></span>        
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Email
+                    Address</label>
+                <input type="email" id="email" required
+                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 text-white rounded-lg box-border focus:outline-none focus:border-indigo-500 transition-colors">
+                <span class="error"></span>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Phone
+                    Number</label>
+                <input type="tel" id="number" required
+                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 text-white rounded-lg box-border focus:outline-none focus:border-indigo-500 transition-colors">
+                <span class="error"></span>
+            </div>
+
+            <div>
+                <label
+                    class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Password</label>
+                <input type="password" id="password" required
+                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 text-white rounded-lg box-border focus:outline-none focus:border-indigo-500 transition-colors">
+                <span class="error"></span>
+            </div>
+
+            <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Confirm
+                    Password</label>
+                <input type="password" id="confirmPassword" required
+                    class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 text-white rounded-lg box-border focus:outline-none focus:border-indigo-500 transition-colors">
+                <span class="error"></span>
+            </div>
+
+            <button type="submit"
+                class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg cursor-pointer hover:bg-indigo-500 transition-colors shadow-lg shadow-indigo-600/20 mt-2">Create
+                Account</button>
+        </form>
+
+        <p class="text-center mt-6 text-sm text-slate-400">
+            Already have an account? <a href="login.html"
+                class="text-indigo-400 hover:text-indigo-300 font-medium transition-colors">Sign In</a>
+        </p>
+    </div>
+    <script src="auth.js"></script>
 </body>
 
 </html>
