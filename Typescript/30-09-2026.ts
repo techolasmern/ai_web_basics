@@ -19,7 +19,7 @@ interface Student{
     city: string;
 }
 
-const obj: Student = {
+let obj: Student = {
     name: "john",
     age: 20,
     city: "kozhikode"
@@ -31,3 +31,69 @@ const obj2: Student = {
     city: "mlp"
 }
 
+console.log(obj, obj2);
+
+interface EcommerceUser{
+    name: string;
+    age: number;
+    city: string;
+    balance?: number;
+    role?: string;
+}
+
+interface EcommerceBase {
+    name: string;
+    age: number;
+    city: string;
+}
+
+interface Seller extends EcommerceBase {
+    balance: number;
+}
+
+interface Admin extends Seller {
+    role: string;
+}
+
+const customer: EcommerceBase = {
+    name: "john",
+    age: 20,
+    city: "kozhikode"
+}
+
+const seller: Seller = {
+    name: "rahul",
+    age: 40,
+    city: "mlp",
+    balance: 2000,
+}
+
+const admin: Admin = {
+    name: "admin",
+    age: 30,
+    city: "kozhikode",
+    role: "admin",
+    balance: 2000
+}
+
+
+const customer1: EcommerceUser = {
+    name: "john",
+    age: 20,
+    city: "kozhikode"
+}
+
+const seller1: EcommerceUser = {
+    name: "rahul",
+    age: 40,
+    city: "mlp",
+    balance: 2000,
+}
+
+const admin1: EcommerceUser = {
+    name: "admin",
+    age: 30,
+    city: "kozhikode",
+    role: "admin",
+    balance: 2000
+}
