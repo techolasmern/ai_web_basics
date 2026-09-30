@@ -97,3 +97,57 @@ const admin1: EcommerceUser = {
     role: "admin",
     balance: 2000
 }
+
+// type alias
+
+type UserType = "user" | "admin" | "superAdmin" | "guest";
+
+// user, admin, superAdmin, guest
+const userRole: UserType = "admin";
+
+
+type StudentInfo = {
+    name: string;
+    age: number;
+    city: string;
+    role: UserType;
+}
+
+const stdInfo: StudentInfo = {
+    name: "john",
+    age: 20,
+    city: "kozhikode",
+    role: "superAdmin"
+} 
+
+// -----------------------------------------------------------------
+
+interface Inter1{
+    name: string;
+}
+
+interface Inter2 extends Inter1{
+    age: number;
+}
+
+type Type1 = Inter1 & Inter2 & {
+    city: string;
+}
+
+type Type2 = {
+    name: string;
+    age: number;
+    city: string;
+}
+
+type Type3 = Type1 & Type2;
+
+interface A1 extends Type2 {
+
+}
+
+const sam: A1 = {
+    name: "sdfsdf",
+    city: "kozhikode",
+    age: 20
+}
