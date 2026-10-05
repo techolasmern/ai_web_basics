@@ -54,4 +54,17 @@ const admin1 = {
     role: "admin",
     balance: 2000
 };
+// user, admin, superAdmin, guest
+const userRole = "admin";
+const stdInfo = {
+    name: "john",
+    age: 20,
+    city: "kozhikode",
+    role: "superAdmin"
+};
+const sam = {
+    name: "sdfsdf",
+    city: "kozhikode",
+    age: 20
+};
 //# sourceMappingURL=30-09-2026.js.map
