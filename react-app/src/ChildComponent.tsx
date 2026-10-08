@@ -8,7 +8,7 @@ interface Props{
 export const ChildComponent = ({ p1, p2, children, data }: Props) => {
 
 
-    const handleClick = function (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    const handleClick = function (e: React.MouseEvent<HTMLButtonElement>) {
         console.log("clicked", e);
     }
 

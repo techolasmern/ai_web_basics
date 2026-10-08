@@ -1,15 +1,16 @@
-import { Fragment } from "react";
-import { ChildComponent } from "./ChildComponent";
-
-const data = "Hello";
+// state management -> object -> Hooks -> useState();
+import { useState } from "react";
 
 export const App = () => {
 
-  return <Fragment>
-    <h1>Hello</h1>
-    <p>Hey</p>
-    <ChildComponent p1="data1" p2="hey" data={data}>
-      <span>This is a child element (App.tsx)</span>
-    </ChildComponent>
-  </Fragment>
+    const [state, setState] = useState<number>(0);
+
+    const handleUpdateA = () => {
+        setState(state + 1);
+    }
+
+    return <div>
+        <p>Data - {state}</p>
+        <button onClick={handleUpdateA}>Update A</button>
+    </div>
 }
