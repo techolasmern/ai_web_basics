@@ -6,6 +6,8 @@ import { useState } from "react";
 export const App = () => {
     
     const [theme, setTheme] = useState<"light" | "dark">("light");
+    const [counter, setCounter] = useState<number>(0);
+    const [className, setClassName] = useState<string>("font-mono uppercase bg-white text-black flex flex-col items-center justify-center h-screen");
     // const [data, setData] = useState<number>(0);
     // const [numbers] = useState<Array<number>>([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
@@ -19,7 +21,7 @@ export const App = () => {
     //     </div>
     // }
 
-    return <div>
+    return <div className={className}>
         {/* <div>{data}</div>
         <button onClick={handleClick}>Update</button>
         {
@@ -35,14 +37,17 @@ export const App = () => {
 
         { theme === "dark" ? <div>This is dark mode</div> : <div>This is light mode</div>}
 
-        <button className="p-2 bg-red-500 text-white" onClick={() => {
+        <button className="p-2 bg-red-500 mt-8 text-white cursor-pointer rounded-full px-7 active:scale-99 shadow shadow-black active:shadow-none duration-200 font-mono" onClick={() => {
             if (theme === "dark") {
                 setTheme("light")
+                setClassName(className.replace("bg-black text-white", "bg-white text-black"));
             } else {
                 setTheme("dark");
+                setClassName(className.replace("bg-white text-black", "bg-black text-white"));
             }
+            setCounter(counter + 1);
         }}>Toggle</button>
+        <p className="font-serif capitalize mt-4 text-green-700">You have clicked button <span className="text-2xl">{counter}</span> times</p>
 
-        
     </div>
 }
