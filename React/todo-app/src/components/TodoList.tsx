@@ -2,19 +2,47 @@ import { useState } from "react";
 import type { Todo } from "../types/todo"
 
 type Props = {
-    item: Todo,
-    handleRemove: (id: string) => void;
-    handleMarkAsCompleted: (id: string) => void;
-    handleEdit: (item: Todo) => void;
-    editItem: Todo | null;
-    handleEditSubmit: (id: string, new_title: string | undefined) => void;
+    item: Todo;
+    todoList: Todo[];
+    setTodoList: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-export const TodoList = ({ item, handleRemove, handleEditSubmit, handleMarkAsCompleted, handleEdit, editItem }: Props) => {
+export const TodoList = ({ item, setTodoList, todoList }: Props) => {
 
+    const [editItem, setEditItem] = useState<Todo | null>(null);
     const [editInput, setEditInput] = useState<string | undefined>(editItem?.title);
 
-    console.log(editInput);
+    const handleRemove = (id: string) => {
+        const data = todoList.filter((item) => item.id !== id);
+        setTodoList(data);
+    }
+
+    const handleMarkAsCompleted = (id: string) => {
+        const updatedList = todoList.map(item => {
+            if (item.id == id) {
+                const currentTime = new Date().toLocaleString("en-IN");
+                return { ...item, is_completed: true, updated_at: currentTime };
+            }
+            return item;
+        });
+        setTodoList(updatedList);
+    }
+
+    const handleEdit = (item: Todo) => {
+        setEditItem(item);
+    }
+
+    const handleEditSubmit = (id: string, new_title: string | undefined) => {
+        const updatedList = todoList.map(item => {
+            if (item.id == id) {
+                const currentTime = new Date().toLocaleString("en-IN");
+                return { ...item, title: new_title, updated_at: currentTime };
+            }
+            return item;
+        });
+        setTodoList(updatedList);
+        setEditItem(null);
+    }
 
     return <div className="p-3 rounded-md flex flex-col shadow gap-2 shadow-black/30">
         <span>{item.id === editItem?.id ? <>
