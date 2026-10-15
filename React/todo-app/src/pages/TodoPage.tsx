@@ -17,7 +17,7 @@ export const TodoPage = () => {
         if (todo.trim() == "") return setErrorMessage("Task cannot be empty.");
         if (todo.trim().length < 10) return setErrorMessage("Task must be at least 10 characters long.");
         const currentTime = new Date().toLocaleString("en-IN");
-        const taskObj = {
+        const taskObj: Todo = {
             id: crypto.randomUUID(),
             title: todo,
             is_completed: false,
