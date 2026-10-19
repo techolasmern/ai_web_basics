@@ -73,9 +73,12 @@ export const App = () => {
     const [state, dispatch] = useReducer<number | undefined, [action: Action]>(reducer, 0);
 
     return <div className="flex justify-center items-center h-screen flex-col">
-        <p>State Value: {state}</p>
-        <button onClick={() => dispatch({ type: "INCREMENT" }) }>Increment</button>
-        <button onClick={() => dispatch({ type: "RESET" }) }>Reset</button>
-        <button onClick={() => dispatch({ type: "DECREMENT" }) }>Decrement</button>
+        <h1 className="text-center mb-10 font-bold font-serif underline text-3xl">useReducer() with Typescript</h1>
+        <p className="font-serif">State Value: <span className="font-mono">{state}</span></p>
+        <div className="flex gap-1 mt-3">
+            <button className="bg-emerald-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
+            <button className="bg-gray-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "RESET" })}>Reset</button>
+            <button className="bg-red-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
+        </div>
     </div>
 }
