@@ -55,30 +55,53 @@ import { useReducer } from "react"
 // }
 
 type Action = {
-    type: "INCREMENT" | "DECREMENT" | "RESET";
+    type: "INCREMENT-1" | "DECREMENT-1" | "RESET-1" | "INCREMENT-2" | "DECREMENT-2" | "RESET-2";
 }
 
-const reducer = (state: number | undefined, action: Action) => {
-    if (state === undefined || action.type === "RESET") return 0;
-    if (action.type === "INCREMENT") {
-        return state + 1;
+type Counters = {
+    c1: number;
+    c2: number;
+}
+
+const reducer = (state: Counters, action: Action): Counters => {
+    if (action.type === "RESET-1") {
+        return { ...state, c1: 0 };
     }
-    if (action.type === "DECREMENT") {
-        return state - 1;
+    if (action.type === "RESET-2") {
+        return { ...state, c2: 0 };
     }
+    if (action.type === "INCREMENT-1") {
+        return { ...state, c1: state.c1 + 1 };
+    }
+    if (action.type === "INCREMENT-2") {
+        return { ...state, c2: state.c2 + 1 };
+    }
+    if (action.type === "DECREMENT-1") {
+        return { ...state, c1: state.c1 - 1 };
+    }
+    if (action.type === "DECREMENT-2") {
+        return { ...state, c2: state.c2 - 1 };
+    }
+    return state;
 }
 
 export const App = () => {
 
-    const [state, dispatch] = useReducer<number | undefined, [action: Action]>(reducer, 0);
+    const [state, dispatch] = useReducer<Counters, [action: Action]>(reducer, { c1: 0, c2: 0});
 
     return <div className="flex justify-center items-center h-screen flex-col">
         <h1 className="text-center mb-10 font-bold font-serif underline text-3xl">useReducer() with Typescript</h1>
-        <p className="font-serif">State Value: <span className="font-mono">{state}</span></p>
+        <p className="font-serif">State Value C1: <span className="font-mono">{state.c1}</span></p>
+        <p className="font-serif">State Value C2: <span className="font-mono">{state.c2}</span></p>
         <div className="flex gap-1 mt-3">
-            <button className="bg-emerald-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "INCREMENT" })}>Increment</button>
-            <button className="bg-gray-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "RESET" })}>Reset</button>
-            <button className="bg-red-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "DECREMENT" })}>Decrement</button>
+            <button className="bg-emerald-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "INCREMENT-1" })}>Increment 1</button>
+            <button className="bg-gray-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "RESET-1" })}>Reset 1</button>
+            <button className="bg-red-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "DECREMENT-1" })}>Decrement 1</button>
+        </div>
+        <div className="flex gap-1 mt-3">
+            <button className="bg-emerald-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "INCREMENT-2" })}>Increment 2</button>
+            <button className="bg-gray-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "RESET-2" })}>Reset 2</button>
+            <button className="bg-red-600 w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatch({ type: "DECREMENT-2" })}>Decrement 2</button>
         </div>
     </div>
 }
