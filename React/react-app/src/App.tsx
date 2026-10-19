@@ -83,6 +83,14 @@ const reducer = (state: Counters, action: Action): Counters => {
         return { ...state, c2: state.c2 - 1 };
     }
     return state;
+    
+    // OR Using Ternary
+
+    // return {
+    //     ...state,
+    //     c1: state.c1 + (action.type === "RESET-1" ? -state.c1 : action.type === "INCREMENT-1" ? 1 : action.type === "DECREMENT-1" ? -1 : 0),
+    //     c2: state.c2 + (action.type === "RESET-2" ? -state.c2 : action.type === "INCREMENT-2" ? 1 : action.type === "DECREMENT-2" ? -1 : 0),
+    // }
 }
 
 export const App = () => {
