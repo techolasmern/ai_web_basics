@@ -1,1 +1,1 @@
-export const productApi = "https://dummyjson.com/products";
+export const productApi = "https://dummyjson.com/products"; 
