@@ -1,79 +1,68 @@
-// useEffect; -> LifeCycle, side Effect -> API Calling, Events, Timers
-
 import { useEffect, useState } from "react"
+import { getProducts } from "./services/products"
+import { type Product, type DummyJsonResponse } from "./types/dummyjson";
 
-//
+const LIMIT = 30;
 
-type Product = {
-    title: string;
-    images: string[];
-}
+// (10 - 1) * 10 = 90
 
 export const App = () => {
 
-    const [counter1, setCounter1] = useState<number>(0);
-    const [counter2, setCounter2] = useState<number>(0);
-    const [timer, setTimer] = useState<number>(0);
-    const [productId, setProductId] = useState<number>(1);
-    const [product, setProduct] = useState<Product | null>(null);
-    const [isFetching, setIsFetching] = useState<boolean>(true);
-
-    // useEffect(() => {
-    //     console.log("Mounted"); // Mounting, update, unmounting
-    //     return () => {
-    //         console.log("Unmounted");
-    //     }
-    // }, [counter2]);
-
-    const handleFetch = async () => {
-        try {
-            setIsFetching(true);
-            const response = await fetch(`https://dummyjson.com/products/${productId}`);
-            const data = await response.json();
-            setProduct(data);
-        } catch (err) {
-            return console.log(err);
-        } finally {
-            setIsFetching(false);
-        }
-    }
+    const [products, setProducts] = useState<Product[]>([]);
+    const [page, setPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(0)
+    const [openedModal, setOpenedModal] = useState<Product | null>(null);
+    const [prodImage, setProdImage] = useState<string | null>(null)
 
     useEffect(() => {
-        handleFetch();
-    }, [productId]);
+        (async () => {
+            const response = await getProducts(LIMIT, (page - 1) * LIMIT);
+            if (!response.ok) {
+                return alert(response.message);
+            }
+            const data = response.data as DummyJsonResponse;
+            const total_pages = Math.ceil(data.total / LIMIT)
+            setProducts(data.products);
+            setTotalPages(total_pages);
+        })();
+    }, [page])
 
-    const generateRandomNumber = () => Math.floor(Math.random() * 194) + 1;
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTimer((timer) => timer + 1);
-        }, 1000);
-        return () => {
-            clearInterval(interval);
-        }
-    }, [counter1]);
-
-    return <div className="flex justify-center h-screen items-center flex-col gap-3">
-        <div>Counter 1: {counter1}</div>
-        <div>Counter 2: {counter2}</div>
-        <div>Timer: {timer}</div>
-        {
-            isFetching ? <>
-                <div className="h-96 w-96 bg-slate-300/30 rounded-md">
-                    
+    return <div className="">
+        {openedModal && <div className="fixed top-0 left-0 flex justify-center items-center backdrop-blur-md bg-black/10 h-screen w-screen">
+            <div className="bg-white w-full max-w-125 p-10">
+                <button onClick={() => { setOpenedModal(null); setProdImage(null);  }} className="absolute top-2 right-2">close</button>
+                {prodImage && <img src={prodImage} alt="" />}
+                <div>
+                    {openedModal.title}
                 </div>
-                <h1 className="h-4 w-96 bg-slate-300/30 rounded-md"></h1>
-            </> : <>
-                <div className="h-96 w-96">
-                    <img src={product?.images[0]} alt={product?.title} className="h-full w-full" />
+                <div className="flex gap-3">
+                    {
+                        openedModal.images.map((image, index) => {
+                            return <img onMouseEnter={() => setProdImage(image)} src={image} alt="" key={index} className="h-30"/>
+                        })
+                    }
                 </div>
-                <h1>Prod Title: {product?.title}</h1>
-            </>
-        }
-        <button onClick={() => setProductId(generateRandomNumber())}>Random Product</button>
-        <div className="flex gap-2">
-            <button onClick={() => setCounter1(counter1 + 1)} className="bg-emerald-700 p-2 px-4 rounded-md text-white min-w-30">Click 1</button>
-            <button onClick={() => setCounter2(counter2 + 1)} className="bg-red-700 p-2 px-4 rounded-md text-white min-w-30">Click 2</button>
+            </div>
+        </div>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+            {
+                products.map(product => {
+                    return <div key={product.id} onClick={() => {
+                        setOpenedModal(product);
+                        setProdImage(product.images[0])
+                    }}>
+                        <img src={product.images[0]} alt={product.title} />
+                        <h2>{product.title}</h2>
+                    </div>
+                })
+            }
+        </div>
+        <div className="flex justify-center mt-10 gap-2">
+            {
+                new Array(totalPages).fill(0).map((_, index) => index + 1).map(number => {
+                    return <button onClick={() => setPage(number)} key={number} className="p-2 rounded-full w-10 h-10 flex items-center justify-center bg-emerald-700 text-white shrink-0">{number}</button>
+                })
+            }
         </div>
     </div>
 }
