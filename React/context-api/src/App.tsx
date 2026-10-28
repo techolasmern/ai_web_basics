@@ -3,32 +3,21 @@
 import { createBrowserRouter, RouterProvider, type RouteObject } from "react-router"
 import { HomePage } from "./pages/HomePage"
 import { AboutPage } from "./pages/AboutPage"
-import { createContext } from "react"
+import { CounterProvider } from "./providers/CounterProvider";
 
 // contextApi - for global state management
 
 const routeData: RouteObject[] = [
-    {
-        path: "/",
-        Component: HomePage
-    }, {
-        path: "/about",
-        Component: AboutPage
-    }
+    { path: "/", Component: HomePage },
+    { path: "/about", Component: AboutPage },
 ];
 
 const routes = createBrowserRouter(routeData)
 
-type ContextValueType = { global: string; }
-
-export const CounterContext = createContext<ContextValueType | null>(null);
-
 export const App = () => {
 
-    const data = "This is global data";
-
-    return <CounterContext.Provider value={{global: data}}>
+    return <CounterProvider>
         <RouterProvider router={routes} />
-    </CounterContext.Provider>
+    </CounterProvider>
 
 }

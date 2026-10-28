@@ -1,11 +1,12 @@
-import { useContext } from "react";
-import { CounterContext } from "../App";
+import { Nav } from "../components/Nav";
+import { useCounter } from "../hooks/useCounter";
 
 export const HomePage = () => {
 
-    const value = useContext(CounterContext);
+    const { counter } = useCounter();
 
-    console.log(value);
-
-    return <div>HomePage</div>
+    return <div>
+        <Nav />
+        HomePage - {counter}
+    </div>
 };

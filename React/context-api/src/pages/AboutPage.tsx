@@ -1,11 +1,14 @@
-import { useContext } from "react";
-import { CounterContext } from "../App";
+import { Nav } from "../components/Nav";
+import { useCounter } from "../hooks/useCounter";
 
 export const AboutPage = () => {
 
-    const value = useContext(CounterContext);
+    const { counter, setCounter } = useCounter();
     
-    console.log(value);
-    
-    return <div>AboutPage</div>
+    return <div>
+        <Nav />
+        <p>{counter}</p>
+        <button onClick={() => setCounter(counter + 1)}>Click</button>
+        AboutPage
+    </div>
 };
