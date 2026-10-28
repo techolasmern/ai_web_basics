@@ -19,4 +19,6 @@ function greet(name) {
     console.log("Hello, " + name);
 }
 greet("John");
+//
+const btn = document.getElementById("btn");
 //# sourceMappingURL=index.js.map

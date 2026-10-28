@@ -2,7 +2,7 @@ import { TypedLink } from "./Link";
 
 export const TopNavBar = () => {
 
-    const getRandomPathName = () => {
+    const getRandomPathName = (): `/profile/${string}` => {
         const rn = Math.floor(Math.random() * 1000);
         return `/profile/${rn}`
     }

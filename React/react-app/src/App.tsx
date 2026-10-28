@@ -93,11 +93,18 @@ const reducer = (state: Counters, action: Action): Counters => {
     // }
 }
 
+const handleDarkMode = (_state: string, action: string): string => {
+    return action == "light" ? "dark" : "light";
+}
+
 export const App = () => {
 
-    const [state, dispatch] = useReducer<Counters, [action: Action]>(reducer, { c1: 0, c2: 0});
+    const [state, dispatch] = useReducer<Counters, [action: Action]>(reducer, { c1: 0, c2: 0 });
+    const [darkMode, dispatchDarkMode] = useReducer(handleDarkMode, "light");
 
-    return <div className="flex justify-center items-center h-screen flex-col">
+    
+    return <div className={`flex justify-center items-center h-screen flex-col bg-white dark:bg-black bg-${darkMode == "light" ? "white" : "black"} text-${darkMode == "light" ? "black" : "white"}`}>
+        <button className="bg-black w-full cursor-pointer min-w-30 text-white p-2 px-4 rounded-md" onClick={() => dispatchDarkMode(darkMode)}>{darkMode}</button>
         <h1 className="text-center mb-10 font-bold font-serif underline text-3xl">useReducer() with Typescript</h1>
         <p className="font-serif">State Value C1: <span className="font-mono">{state.c1}</span></p>
         <p className="font-serif">State Value C2: <span className="font-mono">{state.c2}</span></p>

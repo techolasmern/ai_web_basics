@@ -6,6 +6,12 @@ const fetchProducts = async () => {
     const data = await response.json();
     return data;
 };
+// ------------- OR ----------------------------------------
+// const fetchProducts = async () => {
+//     const response = await fetch(api);
+//     const data = await response.json();
+//     return data as ApiResponse;
+// }
 (async () => {
     const data = await fetchProducts();
     data.products.forEach(product => {

@@ -2,7 +2,7 @@ const todoList = "https://jsonplaceholder.typicode.com/todos";
 const singleTodoWithId_2 = "https://jsonplaceholder.typicode.com/todos/2";
 
 type Todo = {
-    userId: number;
+    userId: number; 
     id: number;
     title: string;
     completed: boolean;

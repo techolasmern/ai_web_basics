@@ -31,3 +31,8 @@ function greet(name: string): void {
 }
 
 greet("John");
+
+//
+
+const btn = document.getElementById("btn");
+
