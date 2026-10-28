@@ -1,13 +1,13 @@
 // context api -> state -> props -> props drilling -> useContext
 
-import { createBrowserRouter, RouterProvider } from "react-router"
+import { createBrowserRouter, RouterProvider, type RouteObject } from "react-router"
 import { HomePage } from "./pages/HomePage"
 import { AboutPage } from "./pages/AboutPage"
 import { createContext } from "react"
 
 // contextApi - for global state management
 
-const routes = createBrowserRouter([
+const routeData: RouteObject[] = [
     {
         path: "/",
         Component: HomePage
@@ -15,9 +15,13 @@ const routes = createBrowserRouter([
         path: "/about",
         Component: AboutPage
     }
-])
+];
 
-export const CounterContext = createContext<{ global: string} | null>(null);
+const routes = createBrowserRouter(routeData)
+
+type ContextValueType = { global: string; }
+
+export const CounterContext = createContext<ContextValueType | null>(null);
 
 export const App = () => {
 
