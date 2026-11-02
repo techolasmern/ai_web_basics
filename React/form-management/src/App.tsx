@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-type FormDataType = {
+type FormDataType = { // type for form data
     name: string;
     username: string;
     phone: string;
@@ -13,23 +13,32 @@ type FormDataType = {
 
 export const App = () => {
 
-    const [formData, setFormData] = useState<FormDataType>({ name: "", username: "", phone: "", email: "", password: "", confirm_password: "" });
+    const [formData, setFormData] = useState<FormDataType>({
+        name: "",
+        username: "",
+        phone: "",
+        email: "",
+        password: "",
+        confirm_password: ""
+    }); // initializing form data
 
     const handleSubmit = (event: React.SubmitEvent) => {
         event.preventDefault();
-        // regex for email validation
+        // update the submit with regex for email validation
         console.log(formData);
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.name === "username") {
-            event.target.value = event.target.value.toLowerCase().replace(" ", "_");
-        }
-        setFormData(prevState => ({...prevState, [event.target.name]: event.target.value }));
+        setFormData(prevState => {
+            return {
+                ...prevState,
+                [event.target.name]: event.target.value // dynamic key should be in square brackets
+            }
+        });
     }
 
     return <div className="flex justify-center mt-10">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-100">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-100"> 
             <input onChange={handleChange} value={formData.name} className="p-2 border-2 border-gray-500 outline-0 rounded-md" type="text" name="name" placeholder="Ex: John" />
             <input onChange={handleChange} value={formData.username} className="p-2 border-2 border-gray-500 outline-0 rounded-md" type="text" name="username" placeholder="Ex: johndoe" />
             <input onChange={handleChange} value={formData.phone} className="p-2 border-2 border-gray-500 outline-0 rounded-md" type="text" name="phone" placeholder="+91 9876543210" />
