@@ -22,7 +22,7 @@ export const App = () => {
         confirm_password: ""
     }); // initializing form data
 
-    const handleSubmit = (event: React.SubmitEvent) => {
+    const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         // update the submit with regex for email validation
         console.log(formData);
