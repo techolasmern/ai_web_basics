@@ -11,12 +11,18 @@ export const RefPage = () => {
    
 
     useEffect(() => {
-       
-        document.addEventListener("mousemove", e => {
-            if(moveRef.current){
+
+        const handleMove = (e: MouseEvent) => {
+            if (moveRef.current) {
                 moveRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
             }
-        });
+        }
+       
+        document.addEventListener("mousemove", handleMove);
+
+        return () => {
+            document.removeEventListener("mousemove", handleMove);
+        }
     }, []);
 
     if (response.loading) {
@@ -42,6 +48,6 @@ export const RefPage = () => {
         <button onClick={handleFocus}>Click</button>
         <div>{response.data?.comments[3].body}</div>
 
-        <div className="w-3 h-3 bg-red-700 fixed top-0 left-0 duration-1000 transition-all" ref={moveRef}></div>
+        <div className="w-3 h-3 bg-red-700 fixed top-0 left-0 duration-300 transition-all ease-linear" ref={moveRef}></div>
     </div>
 };
