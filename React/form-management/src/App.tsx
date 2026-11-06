@@ -10,8 +10,8 @@ const DisplayError = ({ message }: { message: string | undefined; }) => {
 
 export const App = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-    
+    const { register, handleSubmit, formState: { errors }, getValues } = useForm<FormData>();
+
     const onSubmit = (data: FormData) => {
         console.log(data);
     }
@@ -30,12 +30,24 @@ export const App = () => {
             </div>
             
             <div className="w-full">
-                <input {...register("phone", { required: "Phone is required" })} className="p-2 border-2 border-gray-500 outline-0 rounded-md w-full" type="text" placeholder="+91 9876543210" />
+                <input {...register("phone", {
+                    required: "Phone is required",
+                    pattern: {
+                        value: /^[1-9]{10}$/,
+                        message: "Invalid phone number"
+                    }
+                 })} className="p-2 border-2 border-gray-500 outline-0 rounded-md w-full" type="text" placeholder="+91 9876543210" />
                 <DisplayError message={errors.phone?.message} />
             </div>
 
             <div className="w-full">
-                <input {...register("email", { required: "Email is required" })} className="p-2 border-2 border-gray-500 outline-0 rounded-md w-full" type="text" placeholder="Ex: johndoe@example.com" />
+                <input {...register("email", {
+                    required: "Email is required",
+                    pattern: {
+                        value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                        message: "Invalid email"
+                    }
+                 })} className="p-2 border-2 border-gray-500 outline-0 rounded-md w-full" type="text" placeholder="Ex: johndoe@example.com" />
                 <DisplayError message={errors.email?.message} />
             </div>
 
@@ -45,7 +57,12 @@ export const App = () => {
             </div>
 
             <div className="w-full">
-                <input {...register("confirm_password", { required: "Confirm Password is required" })} className="p-2 border-2 border-gray-500 outline-0 rounded-md w-full" type="password" placeholder="*************" />
+                <input {...register("confirm_password", {
+                    required: "Confirm Password is required",
+                    validate: (value) => {
+                        return value === getValues("password") || "Password does not match";
+                    }
+                 })} className="p-2 border-2 border-gray-500 outline-0 rounded-md w-full" type="password" placeholder="*************" />
                 <DisplayError message={errors.confirm_password?.message} />
             </div>
 
