@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { counterReducer } from "./slices/counter.slice";
+import { todoReducer } from "./slices/todo.slice";
 
 // Combine reducers (Combine all reducers reducers into one)
 const combinedReducer = combineReducers({
     counter: counterReducer,
+    todo: todoReducer
 })
 
 // Configure store (Create the store with the combined reducers)
