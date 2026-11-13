@@ -23,7 +23,7 @@ const todoSlice = createSlice({
             state.todos = state.todos.map(item => {
                 if (item.id === action.payload.id) {
                     const currentTime = new Date().toLocaleString("en-IN");
-                    return { ...item, updated_at: currentTime, title: action.payload.title, is_completed: action.payload.is_completed ?? false, };
+                    return { ...item, updated_at: currentTime, ...action.payload };
                 }
                 return item;
             })
