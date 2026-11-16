@@ -1,7 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/axios";
 import type { Users } from "../types/users";
-import { Child } from "../components/Child";
 
 export const HomePage = () => {
 
@@ -17,20 +16,33 @@ export const HomePage = () => {
         staleTime: 1000 * 60
     });
 
-    if (isLoading) {
-        return <div>Loading...</div>
-    }
+    const { mutate } = useMutation({
+        mutationFn: async () => {
+            const response = await api.post("/users/add", {
+                firstName: 'Muhammad',
+                lastName: 'Ovi',
+                age: 250
+            });
+            return response.data;
+        },
+        onSuccess: () => {
+            const queryClient = useQueryClient();
+            queryClient.invalidateQueries({
+                queryKey: ["users"]
+            })
+        }
+    });
 
-    if (isError) {
-        return <div>Error</div>
-    }
-
+    
     return <div>
         <div className="text-center my-5">
             <h1 className="text-4xl font-bold underline">Tanstack React Query</h1>
         </div>
-        {data?.users[0].firstName}
+        <button onClick={() => mutate()}>Add User</button>
+        {data?.users.map(user => {
+            return <div key={user.id}>{user.firstName} {user.lastName} {user.age}</div>
+        })}
         <br /><br />
-        <Child />
+       
     </div>
 };
