@@ -1,20 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import { api } from "../lib/axios";
-import type { Users } from "../types/users";
+import { useUsersQuery } from "../hooks/reactQuery";
 
 export const Child = () => {
 
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ["users"],
-        queryFn: async () => {
-            const res = await api.get <Users>("/users");
-            return res.data;
-        },
-        refetchOnWindowFocus: false,
-        enabled: true,
-        retry: 1,
-        staleTime: 1000 * 60
-    });
+    const { data, isLoading, isError } = useUsersQuery();
 
     if (isLoading) {
         return <div>Loading...</div>
